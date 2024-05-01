@@ -33,6 +33,12 @@ public class Controller {
 
     private JdbcTemplate tmpl;
 
+    @PostMapping("/users")
+    public void create(@RequestBody @Valid User user) {
+        tmpl.update("INSERT INTO users(user_name, user_phone) VALUES ("+ user.getName()+ "," + user.getPhoneNumber()+ ")");
+        log.info("Пользователь создан");
+    }
+
     @GetMapping("/users/{id}")
     public User get(@PathVariable int id) {
         log.info("Сейчас буду отдавать пользователя по айди");
